@@ -301,7 +301,7 @@ progress::-moz-progress-bar {
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   flex-direction: column;
 }
 
@@ -1032,7 +1032,7 @@ progress::-moz-progress-bar {
 .rig--play .armature-right-hand.armature-rotate{
   animation-name: playPaddle;
   animation-duration: 1s;
-  animation-timing-function: linear;
+  animation-timing-function: ease-in;
   animation-delay: -.4s;
   animation-iteration-count: infinite;
   animation-direction: normal;
@@ -1044,7 +1044,7 @@ progress::-moz-progress-bar {
   transform: translateY(-15rem);
   animation-name: playBall;
   animation-duration: 1s;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
   animation-delay: 0s;
   animation-iteration-count: infinite;
   animation-direction: normal;

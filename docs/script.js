@@ -192,7 +192,6 @@ class Awake extends Action{
         energy: 1 / TIME_FACTOR
       },
       gain: {
-        experience: 1 / TIME_FACTOR,
         fatigue: 0.5 / TIME_FACTOR
       }
     });
@@ -210,6 +209,7 @@ class Sleep extends Action{
         energy: 2 / SLEEP_DURATION
       },
       gain: {
+        experience: 1000 / SLEEP_DURATION,
         concentration: 10 / SLEEP_DURATION
       }
     });
@@ -226,6 +226,7 @@ class Eat extends Action{
         concentration: 1 / EAT_DURATION
       },
       gain: {
+        experience: 100 / EAT_DURATION,
         energy: 10 / EAT_DURATION,
         waste: 4.5 / EAT_DURATION
       }
@@ -244,6 +245,7 @@ class Bathroom extends Action{
         waste: 10 / BATHROOM_DURATION
       },
       gain: {
+        experience: 100 / BATHROOM_DURATION,
         ideas: 1 / BATHROOM_DURATION,
         fatigue: 1 / BATHROOM_DURATION,
       }
@@ -261,6 +263,7 @@ class Play extends Action{
         concentration: 1 / TIME_FACTOR
       },
       gain: {
+        experience: 10 / TIME_FACTOR,
         experience: 5 / TIME_FACTOR,
         ideas: 1 / TIME_FACTOR
       }
@@ -278,7 +281,7 @@ class Create extends Action{
         concentration: 1 / TIME_FACTOR
       },
       gain: {
-        experience: 50 / TIME_FACTOR
+        experience: 500 / TIME_FACTOR
       }
     });
   }
@@ -295,7 +298,8 @@ class Observe extends Action{
       },
       gain: {
         concentration: 1 / TIME_FACTOR,
-        energy: 1.5 / TIME_FACTOR
+        energy: 1.5 / TIME_FACTOR,
+        experience: 250 / TIME_FACTOR
       }
     });
   }
@@ -564,9 +568,18 @@ const rigModifiers = {
 
 const editableOptionKeys = Object.keys(editableOptions);
 
+const soundElement = document.getElementById('buttonSound');
+let stopTime = 1;
+
+soundElement.addEventListener('timeupdate', ()=>{
+  if(soundElement.currentTime >= stopTime){
+    soundElement.pause();
+  }
+}, false);
+
 const sounds = {
-  button: new Audio('./button.wav')
-}
+  button: [0.9, 2]
+};
 
 // -------- Policies --------
 function isSleeping(state){
@@ -729,7 +742,7 @@ function initUI(state){
     resourceKeys.forEach(k => {
       const p = state.ui.resources[k].querySelector('progress');
       p.value = state.creature[k].count;
-      p.setAttribute('max', state.creature[k].max === -1 ? 1000 : state.creature[k].max);
+      p.setAttribute('max', state.creature[k].max === -1 ? 100000 : state.creature[k].max);
       state.ui.debug.appendChild(state.ui.resources[k])
     });
     state.ui.debug.classList.remove('hide');
@@ -1016,7 +1029,9 @@ function shakeHead(state){
 
 function playSound(state, sound){
   if(state.sound){
-    sounds[sound].play();
+    soundElement.currentTime = sounds[sound][0];
+    stopTime = sounds[sound][1];
+    soundElement.play();
   }
 }
 
@@ -1149,10 +1164,10 @@ function unpackSVG(state, data){
 function buttonClick(state, node, handler){
   touchClick(node);
   node.addEventListener('click', evt => {
+    playSound(state, 'button');
     handler(node);
     requestAnimationFrame(()=>{
       node.classList.add('active');
-      playSound(state, 'button');
     });
     node.addEventListener('animationiteration', ()=>{
       requestAnimationFrame(()=>{
