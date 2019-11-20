@@ -565,8 +565,7 @@ const rigModifiers = {
 const editableOptionKeys = Object.keys(editableOptions);
 
 const sounds = {
-  shake: new Audio('shake-head.wav'),
-  button: new Audio('button.wav')
+  button: new Audio('./button.wav')
 }
 
 // -------- Policies --------
@@ -752,6 +751,11 @@ function initUI(state){
     updateUI(state);
   });
   editableOptionKeys.forEach(k => toggleEditableClasses(state, k, -1));
+  state.score = document.querySelector('.score');
+  const span = document.createElement('span');
+  state.scoreValue = span;
+  state.score.appendChild(span);
+  state.score.appendChild(createSvgIcon('symbol-star-icon'));
 }
 
 function changeSelectedEditorOption(state, editableOption){
@@ -823,6 +827,10 @@ function updateUI(state){
       state.ui.actions[1].classList.add('hide');
     }
   }
+  let score = Math.ceil(diff.experience.count / 1000);
+  if(score != state.scoreValue.textContent){
+    state.scoreValue.textContent = score;
+  }
   if(isDebug(window)){
     resourceKeys.forEach(k => {
       const p = state.ui.resources[k].querySelector('progress');
@@ -851,7 +859,7 @@ function debounceSave(state){
   saveTimeout = setTimeout(()=>{
     saveState(state);
     saveTimeout = null;
-  }, 1000);
+  }, 5000);
 }
 
 function gameTick(state){

@@ -320,6 +320,21 @@ progress::-moz-progress-bar {
   display: none;
 }
 
+.controls{
+  display: flex;
+  font-size: 6rem;
+}
+
+.score{
+  display: flex;
+  justify-content: center;
+}
+
+.score svg{
+  width: 8.5rem;
+  height: 8.5rem;
+}
+
 /* ------- Rig ------- */
 .rig, .armature{
   position: absolute;
@@ -1018,7 +1033,7 @@ progress::-moz-progress-bar {
   animation-name: playPaddle;
   animation-duration: 1s;
   animation-timing-function: linear;
-  animation-delay: 0s;
+  animation-delay: -.4s;
   animation-iteration-count: infinite;
   animation-direction: normal;
   animation-fill-mode: none;
@@ -1026,10 +1041,11 @@ progress::-moz-progress-bar {
 }
 
 .rig--play .armature-ball.armature-translate{
+  transform: translateY(-15rem);
   animation-name: playBall;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
-  animation-delay: .4s;
+  animation-delay: 0s;
   animation-iteration-count: infinite;
   animation-direction: normal;
   animation-fill-mode: none;
@@ -1050,6 +1066,7 @@ progress::-moz-progress-bar {
 
 .rig--create .armature-right-needle.armature-rotate,
 .rig--create .armature-right-hand.armature-rotate{
+  transform: rotate(-5deg);
   animation-name: knitRight;
   animation-duration: 1s;
   animation-timing-function: ease-in;
@@ -1498,7 +1515,7 @@ progress::-moz-progress-bar {
     transform: rotate(-5deg);
   }
   50%{
-    transform: rotate(5deg);
+    transform: rotate(0deg);
   }
   100%{
     transform: rotate(-5deg);
@@ -1510,7 +1527,7 @@ progress::-moz-progress-bar {
     transform: rotate(0);
   }
   50%{
-    transform: rotate(10deg);
+    transform: rotate(8deg);
   }
   100%{
     transform: rotate(0);

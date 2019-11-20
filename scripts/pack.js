@@ -4,7 +4,7 @@ const path = require('path');
 
 const state = {};
 const SOURCE_FILE = '../assets/rigFull.svg';
-const OUTPUT_FILE = `../src/svg.js`;
+const OUTPUT_FILE = `../docs/svg.js`;
 
 function pack(){
   console.log(`packing ${new Date().toLocaleTimeString('en-US')}...`)
