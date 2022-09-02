@@ -1041,7 +1041,7 @@ progress::-moz-progress-bar {
 }
 
 .rig--play .armature-ball.armature-translate{
-  transform: translateY(-15rem);
+  /* transform: translateY(-15rem); */
   animation-name: playBall;
   animation-duration: 1s;
   animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
