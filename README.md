@@ -2,9 +2,9 @@
 
 An html game inspired by [Tamagotchi](https://en.wikipedia.org/wiki/Tamagotchi) the handheld digital pet
 
-# Development
+## Development
 
-## Setup
+### Setup
 
 Install dev dependencies
 
@@ -12,7 +12,7 @@ Install dev dependencies
 ~ npm i
 ```
 
-## Figma
+### Figma
 
 The [figma designs](https://www.figma.com/file/l7scjUYTK6q8G982lRL8ct/tamagotchi-clone?type=design&mode=design&t=KqeiXNbpnqQO5XIt-1) are consolidated into a single page called "Rig"
 
@@ -28,6 +28,8 @@ The page is exported from Figma to `assets/rigFull.svg` and then converted to `d
 ~ node ./scripts/pack.js
 ```
 
-## Game
+### Game
 
 The game script is in `docs/script.js` and can played by opening `docs/index.html` in a browser
+
+To see live stats append `?debug` to the url
